@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/js/components/lines.scss"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,mBAAmB,EAAE","file":"lineStyles.css","sourcesContent":[".main-container {\n  border: 1px solid grey;\n  border-radius: 5px; }\n"],"sourceRoot":""}
