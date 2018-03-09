@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import lineSyles from './lines.scss';
 
 
 
@@ -39,7 +39,7 @@ class Lines extends Component{
     render(){
        const { newLine, lines } = this.state;
        
-       return(<div>
+       return(<div className={lineSyles['main-container']}>
             <input value={newLine} onChange={event => {
                 this.setState({newLine: event.target.value})
             }}/>
