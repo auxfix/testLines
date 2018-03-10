@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import lineSyles from './lines.scss';
-
+import OneLine from './oneLine.component'
 
 
 class Lines extends Component{
@@ -51,9 +51,7 @@ class Lines extends Component{
             <div>
                 {
                     lines.map(line => {
-                        return (<div key={line.id}>
-                            <span>{line.name}</span>
-                        </div>)
+                        return (<OneLine id={line.id} name={line.name}/>)
                     })
                 }
             </div>
