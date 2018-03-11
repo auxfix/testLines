@@ -1,5 +1,29 @@
+$green: #2ecc71;
+$red: #e74c3c;
+$blue: #3498db;
+$yellow: #f1c40f;
+$purple: #8e44ad;
+$turquoise: #1abc9c;
 
 .main-container{
-    border: 1px solid grey;
-    border-radius: 5px;     
+    display:flex;
+    justify-content: center;
+    height: 100%; 
+}
+
+.line-component{
+    background: #2c3e50;
+    padding: 10px;
+}
+
+.line-header{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $yellow;
+}
+
+.input-controls{
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
 }

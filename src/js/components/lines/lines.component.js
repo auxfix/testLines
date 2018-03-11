@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import lineSyles from './lines.scss';
-import OneLine from './oneLine.component'
+import lineStyles from './lines.scss';
+import OneLine from './oneLine/oneLine.component'
 
 
 class Lines extends Component{
@@ -39,21 +39,26 @@ class Lines extends Component{
     render(){
        const { newLine, lines } = this.state;
        
-       return(<div className={lineSyles['main-container']}>
-            <input value={newLine} onChange={event => {
-                this.setState({newLine: event.target.value})
-            }}/>
+       return(<div className={lineStyles['main-container']}>
+            <div className={lineStyles['line-component']}>
+                <h2 className={lineStyles['line-header']}> Lines application (Massive Attack inspired)</h2>
+                <div className={lineStyles['input-controls']}>
+                    <input value={newLine} onChange={event => {
+                        this.setState({newLine: event.target.value})
+                    }}/>
 
-            <button onClick={this.addLine.bind(this)}>
-             {"Add Line"}
-            </button>
+                    <button className='btn third' onClick={this.addLine.bind(this)}>
+                    {"Add Line"}
+                    </button>
+                </div>
 
-            <div>
-                {
-                    lines.map(line => {
-                        return (<OneLine id={line.id} name={line.name}/>)
-                    })
-                }
+                <div>
+                    {
+                        lines.map(line => {
+                            return (<OneLine id={line.id} name={line.name}/>)
+                        })
+                    }
+                </div>
             </div>
         </div>)
     }
