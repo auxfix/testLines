@@ -24,16 +24,31 @@ class Lines extends Component{
         
     }
 
+    getBrandNewLineId(oldLine){
+        if(!!oldLine){
+            return oldLine.id + 1;
+        }
+
+        return 0;
+    }
+
     addLine(){
         let {lines: oldLines, newLine} = this.state;
 
         oldLines.push({
-            id: oldLines[oldLines.length-1].id + 1,
+            id: this.getBrandNewLineId(oldLines[oldLines.length-1]),
             name: newLine,
             color: 'blue'
         });
 
         this.setState({lines: oldLines, newLine: ''})
+    }
+
+    deleteLine(id){
+        let { lines } = this.state;
+        lines.splice(id, 1);
+
+        this.setState({lines})
     }
 
     render(){
@@ -55,7 +70,11 @@ class Lines extends Component{
                 <div>
                     {
                         lines.map(line => {
-                            return (<OneLine id={line.id} name={line.name}/>)
+                            return (<OneLine key={line.id} 
+                                             id={line.id} 
+                                             name={line.name}
+                                             deleteLine={(id) => this.deleteLine(id)}
+                                             />)
                         })
                     }
                 </div>
