@@ -5,7 +5,7 @@ const OneLine = ({name, deleteLine, id}) => (
     <div className={styles.line}>
         <span>{name}</span>
         <i onClick={(id) => deleteLine(id)}
-            class="material-icons md-24">clear</i>
+            className="material-icons md-24">clear</i>
     </div>
 );
 

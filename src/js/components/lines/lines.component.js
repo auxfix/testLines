@@ -35,6 +35,8 @@ class Lines extends Component{
     addLine(){
         let {lines: oldLines, newLine} = this.state;
 
+        if(!newLine) return;
+
         oldLines.push({
             id: this.getBrandNewLineId(oldLines[oldLines.length-1]),
             name: newLine,
