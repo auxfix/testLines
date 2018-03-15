@@ -13,6 +13,9 @@ describe('<Lines />', () => {
         wrapper = shallow(<Lines />);
     });
 
+    it('lines match the snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+    });
 
     it('Should be 3 lines by default', () => {
         expect(wrapper.find(OneLine)).toHaveLength(3);
@@ -40,5 +43,15 @@ describe('<Lines />', () => {
 
         expect(mWrapper.find(OneLine)).toHaveLength(2);
     })
+
+    it('should not add new line if the input is empty',() => {
+                
+        expect(wrapper.find(OneLine)).toHaveLength(3);
+
+        wrapper.find('button.btn').simulate('click');
+
+        expect(wrapper.find(OneLine)).toHaveLength(3);
+    })
+
 
 });
