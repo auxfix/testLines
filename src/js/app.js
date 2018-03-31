@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Lines from './components/lines/lines.component';
+import Lines from './components/lines/lines.componen';
 import "../assets/styles/global.scss";
 
-ReactDOM.rend(<Lines/>, document.getElementById('app-line'));
+ReactDOM.render(<Lines/>, document.getElementById('app-line'));
