@@ -4,3 +4,8 @@ node_js:
 script:
   - npm run test
   - npm run build
+
+cache:
+  npm: true
+  directories:
+    - node_modules
