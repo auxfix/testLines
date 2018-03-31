@@ -1,9 +1,17 @@
+sudo: required
 language: node_js
+services:
+  - docker
+
 node_js:
   - "9"
 script:
   - npm run test
   - npm run build
+
+after_success:
+  - docker --version  
+  - docker build -t lines-app-nginx-dev .
 
 cache:
   npm: true
