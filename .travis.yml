@@ -1,19 +1,20 @@
 sudo: required
 language: node_js
 services:
-  - docker
-
+- docker
 node_js:
-  - "9"
+- '9'
 script:
-  - npm run test
-  - npm run build
-
-after_success:
-  - docker --version  
-  - docker build -t lines-app-nginx-dev .
-
+- npm run test
+- npm run build
+- eval $(aws ecr get-login --region us-east-2)
+- docker-compose build
+- docker tag smalldev/lines:latest 325135203026.dkr.ecr.us-east-2.amazonaws.com/smalldev/lines:latest
+- docker push 325135203026.dkr.ecr.us-east-2.amazonaws.com/smalldev/lines:latest
 cache:
   npm: true
   directories:
-    - node_modules
+  - node_modules
+env:
+  global:
+    secure: hsPwVlPUFebfbyB8GLt8Y2W85oPaYdLuX4u/dKf0TwYbJZAINpqlLZptqQmy0MbjhMO+Q2pfKBC9Wx3jFzIzs10vr1offyNRmx+0p17Wa2qOWzhRq8J7WaxNMxc8iANT1i5ZblZmXwyMhFcaYN5E2z2rNir0Hb2N2s4gp8ryuREEi+J7jtBxRqKRCISUtDfuaTu2GFJHowhVlcOsFX/7QFUW58kLEJ/2cJ4s/JM6/2z2sVlIX0SFyPrA7TkVS9t7DkICQUFz6Bdu0nlR4QSpz5TxzuBq8Gfe3OIxUuTRRR/WjvzngUnl8MXXIOpdqsMfINIOYEV1sCt6cOw4CFkMSCpMcn+I/SkU4JRHnDlD0SO2u1H5Z6671MLEE01ANTywGJZN65NoLqE4qbEtVe8T2g8shKs4ahMRwi9k8eIBmQaddo+1mf/xa+8XsGpkVwJZeFWWMEm8cbuL5+2ODdpkkRVmbk4RymB9S5zcQwWLYqdJkns6zbQQJkGlVz+9ec9EuI3HrPXC+5T5aSyc82+tX3urnwJCzQtcU/Wh6iUGeZx20ak9+lqdWX/707dALs1tZObD8iO5JLT0G/GonNpUw6cKNE7au+8yoagp1QB0lJxfRZqLPiyiKEUk0bqO4MrI7QTTin+BNQ9UYuGl2TxbVLpejaRQKcgAVlEnc2EBmkw=
