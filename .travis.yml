@@ -10,7 +10,7 @@ script:
 - docker --version  
 - pip install --user awscli 
 - export PATH=$PATH:$HOME/.local/bin 
-- eval $(aws ecr get-login --region us-east-2)
+- eval $(aws ecr get-login --region us-east-2 --no-include-email)
 - docker-compose build
 - docker tag smalldev/lines:latest 325135203026.dkr.ecr.us-east-2.amazonaws.com/smalldev/lines:latest
 - docker push 325135203026.dkr.ecr.us-east-2.amazonaws.com/smalldev/lines:latest
