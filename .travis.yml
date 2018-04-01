@@ -7,18 +7,8 @@ node_js:
 script:
 - npm run test
 - npm run build
-- docker --version  
-- pip install --user awscli 
-- export PATH=$PATH:$HOME/.local/bin 
-- eval $(aws ecr get-login --region us-east-2 --no-include-email)
 - docker-compose build
-- docker tag smalldev/lines:latest 325135203026.dkr.ecr.us-east-2.amazonaws.com/smalldev/lines:latest
-- docker push 325135203026.dkr.ecr.us-east-2.amazonaws.com/smalldev/lines:latest
 cache:
   npm: true
   directories:
   - node_modules
-env:
-  global:
-  - secure: U9xGgO7FRhAPge4smsz56QmqoZfOJj+4bkFS2QUwk3rTrWoPApGzugrEnuEsz9WUEagICJ96N67VD2aFJRd4Frjv26rqN7E++KkV2uxy3kH0kKtOAV5ahVUd1Hs3oNwX1WS6rypKl4vnOd4UHErc1SiKf0ir6VtiGAqXSQe1Empkxma6byy61an7MgJXgU34ba/JiSCXAUyCkLbq0JgcNhsH7+PG9wU7FRVvzK3sIb5qSGmjCfB0EtmbRlDkA4FmYpDxxJXYaxRUn39DNRquOj0dY9cth4DbMHrei8vzaG82SMXRoe34KJtoTPeMWvySK/CMQLYbsGvMm51cgCh5sahtUI7TqiLZ8IuT3ZHlLxn9T0YWsR9/ECNmG5KL0UWAzGeN4eTIWLb6qcP6H1feSPnf7TcTA5pRXrrg9uOeH5iwxfOLAtzoQR4fXEC21P51/Y7D4ea9+2+0LTJu4hKhGRVeAdPi/h11fp5Zx7w9Z1OdsMbioH+2fwTDVKh1qdOdwB4ORmD4RngMMPnl0wGWszi088cxYjhtNXd9mVgTYPtvbUplI5YmRG/1mWEcQFbJ6aXkv3vXfMYb29dZ8OT71OCxHm3VN+yvkHbBO7zHHsgkdhfwOToHF5ICsGaPWVETMgW3WPofITuu8pGpgIhliO3Pv6PkMbE7wZaSX1cXtLI=
-  - secure: boGmjQtPVmnsEcpRHbaefVc3x9My/2jihf6liJ0I7+WqbqqAIZcYALLrryLQGy3AM2vIHHuO28z7LUeM/NkjPe8IZztksOSRfV0pYgnrcYgKIF5ALYtm4vPzkEY/pfS72Ov+9t+CV518kEZK/ORp0XxanbU676NQc3ewmZ+sjKWGPtW4nhbuyDzmJsyM3qkcCzrFNJMVGYSispSAhiuvSrPahAYvHqBx9utOFnx1W6rA3x4feYJBwaO2db7s12crBKzOMn52YqexLdYP2OFAN2GqbO3eG94bX0P4hbDJ/mPAI+b/n5rngB4nuu7zH/wPB52f+FPN0KySTVGYWKGPhgBKGGhn9Od9/+ei6bv7I0flvyKzOSsr+yEFMSevDMPdXegc3BufZtMN0GVh4VE4AiuNGr0K1Fp2D6koKF4fKYYpwKOc/a8YnaqeWhOeSolDgeWWZ3iXTX1kuW7vtrgJmN6GXZVuMgdVaMm/JG8u8iniGdhd1+eDqJ4NafweODmQ6n4Tnh3rXWVp4trNnbPecB0TbvfX47A3vaRi5GUplyHwdejE+6wWregH3tQGp5KYS4DFHokxgLf8wqYA7/lYQXqXvAkdCNwi352IQqKjy/bSkAXAZZkKDISi0K1nFrJdWMpRdkLFApgYOWW+ieKmG6fdXzY2xK2be+Rc16JPSeo=
