@@ -7,4 +7,4 @@ services:
       - /usr/src/app
     ports:
       - "8000:80"
-    image: smalldev/lines
+    image: sofarawaydev/lines

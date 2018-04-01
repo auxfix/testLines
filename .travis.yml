@@ -2,12 +2,25 @@ sudo: required
 language: node_js
 services:
 - docker
+env:
+  global:
+  - IMAGE_NAME=sofarawaydev/lines
+  - secure: qRG1hXDH7D9ew0mpXCcvoytFNyT4B2vzZqN3/DdQyZ/mCyNaSssb3igwB6qS4IeiVwnUJwbYyuj0BocJRgYbhj3VvqkXW8ZbbaveEJHXO5v9ZECmKsCM6bm4hwQ6eXlK1rSWnbbQi/bUgwEpX/Q52yMtgvEHJAXcPi+1IJf5mHpMlabu/uYIdqz+MYPU7SJloqe3K39AdI7CJGaAPKUIimyW3TEPMq0eRaLxD10JLPeVAjCE8xwSxWkuJFt4oQhPPcBrbqM6HEtx6BmAdckZnjHmtcl2DbbRqeOw5i0e0woH29j0jkDL0v/RqE3DfMBI3iFxXbm5U/S6Ba8JpZzQqKKKSUDYKfh4WkkEQVMttMC5iOoQYA3Y+S8BdVA6nJFv8nyEN7XB/bQFM9nmU7d8+zoaylC9uoRB1Pe0Q5Pj+u4LfpjbB3IxXisRi54tswhLa5wY6xCBVT25gxbbFwg6RJUvuPD3vW+3EqI5HdrVmcjoU9Y1qnHhoJQURtaNLmfHwqKc7MIP5ILtMkcxZx0yK6GNj1GwQ5JHr5uXNrRvK+IVCR/GKdq9tN3Yytqe2ILdwl9dJA6QKVhx9fKRrzjNYE160TmpvOqwjU3gME0pSPF5cnVaROklGp8DRktyjr8MvSxHb/aZUErw6hKD1+w9QLSSApzSHc87EnPkHtGnaCM=
+  - secure: 2gC9FfUO0C39VHdf//UwRX49GBcKkdOrBg3ak6F8UEhXavhte6uAMpmTGK+bF29IFPpt6ovlwz1rSwDWJBSYFkriEj561UOE4vlpvXYHd9QeIbS7e1mT65P52ZCi6hM9Anr9vJ8OQk6aGIFfPJ+sFEhKoDp3JcGbQeozlXaFBmFxHkUWAWpV2IwXvnTDSCxGgCgftiUsyt0u4M+NCdFz5CsiSngJUvZWMZlA6l9CWvOPMEBPEmPJxi4FXV+xA0F9u8PtQ7A/hgnG8fEVrOAZmBCJH3FxMWAGm04T3DtGxqRYn1jP9tqRyKVTZUNuoyabnitGUkup8E/VmBjWc9bopjfW/lqv+HuQ2kVLC4yR+G7OomG1dAbwTgOcoTRnVSA9TM3fnNxyB/zuWoB7RxEyhCxuT4gylCyV81vbIIDlw4YmsLFgfdA2KnTpGZLPUgT/Y4SdxkhL2Y0vaPrVlXv6MNKjj7y+E+LaqWqKQgLqTVbYSWgGW6NfqPXoKECxj57/A40h/bce9LT1M4+8uL0uzqXaKVHLmejYnr33/UZSMxMsclH3ZKhN/LUK2f4u9U0q4m12uwwYKYnp34nVhpN8sT8RjY91WK8a9G3wzD1JyL4of2TLgNd4Ojyi52ObKpQ6pYFF12zygngVVAafMsXwQ3iMFUQCDVZz9/iaZYjglOg=
 node_js:
 - '9'
 script:
 - npm run test
 - npm run build
 - docker-compose build
+before_deploy:
+- docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD"
+- docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest"
+  on:
+    branch: master
 cache:
   npm: true
   directories:
