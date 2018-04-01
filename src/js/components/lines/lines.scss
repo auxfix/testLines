@@ -27,3 +27,10 @@ $turquoise: #1abc9c;
     align-items: center;
     justify-content: space-around;
 }
+
+.lines-version-container{
+    .lines-version{
+        float:right;
+        color:$yellow;
+    }
+}
