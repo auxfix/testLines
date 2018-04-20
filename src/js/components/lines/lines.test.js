@@ -1,16 +1,39 @@
 import 'jsdom-global/register';
 import React from 'react';
 
-import Adapter from 'enzyme-adapter-react-16';
+import Immutable from "immutable";
+import { Provider } from "react-redux";
+import configureStore from 'redux-mock-store';
 
 import Lines from './lines.component';
 import OneLine from './oneLine/oneLine.component';
+
+const store = configureStore();
+
+const mockStore = store({
+	lines: Immutable.fromJS([
+        {
+            id: 0, name: 'redux line'
+        },
+        {
+            id: 1, name: 'react line'  
+        },
+        {
+            id: 2, name: 'immutable line'
+        }
+    ]),
+});
+
+
 
 describe('<Lines />', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<Lines />);
+        wrapper = mount(
+            <Provider store={mockStore}>
+                <Lines />
+            </Provider>);
     });
 
     it('lines match the snapshot', () => {
@@ -20,38 +43,4 @@ describe('<Lines />', () => {
     it('Should be 3 lines by default', () => {
         expect(wrapper.find(OneLine)).toHaveLength(3);
     });
-
-    it('should add new line',() => {
-        const masiveLine = 'massive line';
-              
-        expect(wrapper.find(OneLine)).toHaveLength(3);
-
-        wrapper.setState({newLine: masiveLine});
-        wrapper.find('button.btn').simulate('click');
-
-        expect(wrapper.find(OneLine)).toHaveLength(4);
-        expect(wrapper.find(OneLine).last().props().name).toBe(masiveLine);
-    })
-
-    it('should delete one line',() => {
-        
-        let mWrapper = mount(<Lines />);
-        
-        expect(mWrapper.find(OneLine)).toHaveLength(3);
-
-        mWrapper.find(OneLine).find('i').at(1).simulate('click');
-
-        expect(mWrapper.find(OneLine)).toHaveLength(2);
-    })
-
-    it('should not add new line if the input is empty',() => {
-                
-        expect(wrapper.find(OneLine)).toHaveLength(3);
-
-        wrapper.find('button.btn').simulate('click');
-
-        expect(wrapper.find(OneLine)).toHaveLength(3);
-    })
-
-
 });

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import lineStyles from './lines.scss';
 import OneLine from './oneLine/oneLine.component';
 import {connect} from 'react-redux';
-import { addLine, deleteLine } from '../../reducers/lines';
+import { addLine, deleteLine } from '../../reducers/lines/lines';
 
 const mapStateToProps = ({lines}) => ({ lines: lines.toJS() });
 const mapDispatchToProps = (dispatch) => ({

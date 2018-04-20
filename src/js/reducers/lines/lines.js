@@ -15,10 +15,8 @@ const initialState = Immutable.fromJS([
     }
 ]);
 
-
-
 const addLine = createAction('LINE_ADD');
-const deleteLine = createAction('LINED_ELETE');
+const deleteLine = createAction('LINE_DELETE');
 
 
 const lines = handleActions({
