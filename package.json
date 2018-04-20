@@ -12,6 +12,7 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
+    "collectCoverage": true,
     "snapshotSerializers": [
       "<rootDir>/node_modules/enzyme-to-json/serializer"
     ],
