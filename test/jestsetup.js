@@ -11,6 +11,7 @@ global.shallow = shallow;
 global.render = render;
 global.mount = mount;
 global.toJson = toJson;
+global.__VERSION__ = "TEST";
 
 // Fail tests on any warning
 console.error = message => {

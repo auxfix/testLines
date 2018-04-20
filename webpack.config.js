@@ -1,75 +1,21 @@
-const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var merge = require("webpack-merge");
 
-module.exports = {
-  entry: ["./src/js/app.js"],
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "js/[name].js"
-  },
-  devServer: {
-    contentBase: "./dist"
-  },
-  devtool: 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader"
-          }
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-          use:[
-            {
-              loader: "css-loader",
-              options:{
-                modules: true,
-                localIdentName: '[name]_[local]_[hash:base64:5]'
-              }
-            },
-            'postcss-loader'
-          ]
-        }) 
-      },
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-          use:[
-            {
-              loader: "css-loader",
-              options:{
-                modules: true,
-                sourceMap: true,
-                importLoaders: 2,
-                localIdentName: '[name]_[local]_[hash:base64:5]'
-              }
-            },
-            'sass-loader'
-          ]
-        }) 
-      }
-    ]
-  },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
-    }),
-    new ExtractTextPlugin('lineStyles.css')
-  ]
-};
+var _configs = {
+    global: require(__dirname + "/configs/global"),
+    development: require(__dirname + "/configs/development"),
+    production: require(__dirname + "/configs/production")
+}
+
+var _loadConfiguration = function (environment) {
+
+    if (!environment) throw "Can't find environment variable";
+    if (!_configs[environment]) throw "Can't find environment configuration. See _configs object";
+
+    return merge(
+        _configs["global"](__dirname, environment),
+        _configs[environment](__dirname, environment)
+    );
+
+}
+
+module.exports = _loadConfiguration(process.env.NODE_ENV);
