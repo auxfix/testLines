@@ -1,6 +1,6 @@
 import Immutable from "immutable";
 import configureStore from 'redux-mock-store';
-import { addLine, deleteLine } from '../../reducers/lines/lines';
+import { addLine, deleteLine } from './lines';
 
 const store = configureStore();
 

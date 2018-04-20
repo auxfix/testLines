@@ -38,7 +38,8 @@ exports[`<Lines /> lines match the snapshot 1`] = `
         <div>
           <div>
             <span>
-              v 0.0.2
+              v 
+              TEST
             </span>
           </div>
           <h2>

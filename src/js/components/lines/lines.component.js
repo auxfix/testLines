@@ -44,7 +44,7 @@ class Lines extends Component{
        return(<div className={lineStyles['main-container']}>
             <div className={lineStyles['line-component']}>
                 <div className={lineStyles['lines-version-container']}>
-                    <span className={lineStyles['lines-version']}>v 0.0.2</span>
+                    <span className={lineStyles['lines-version']}>v {__VERSION__}</span>
                 </div>
                 <h2 className={lineStyles['line-header']}> Lines application (Massive Attack inspired)</h2>
                 <div className={lineStyles['input-controls']}>

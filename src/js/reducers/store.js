@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 
-import lines from './lines/lines';
+import lines from 'reducers/lines/lines';
 
 const rootReducer = combineReducers({
   lines
