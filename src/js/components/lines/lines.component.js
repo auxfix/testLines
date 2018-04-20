@@ -1,60 +1,45 @@
 import React, {Component} from 'react';
 import lineStyles from './lines.scss';
-import OneLine from './oneLine/oneLine.component'
+import OneLine from './oneLine/oneLine.component';
+import {connect} from 'react-redux';
+import { addLine, deleteLine } from '../../reducers/lines';
 
+const mapStateToProps = ({lines}) => ({ lines: lines.toJS() });
+const mapDispatchToProps = (dispatch) => ({
+     addLineAction: (line) => dispatch(addLine({line})),
+     deleteLineAction: (id) => dispatch(deleteLine({id}))
+});
 
+@connect(mapStateToProps, mapDispatchToProps)
 class Lines extends Component{
     constructor(props){
         super(props);
 
         this.state = {
-            lines: [
-                {
-                    id: 0, name: 'line zero', color: 'red'
-                },
-                {
-                    id: 1, name: 'line one', count: 'blue'    
-                },
-                {
-                    id: 2, name: 'line two', count: 'green'
-                }
-            ],
             newLine:''
         };
         
     }
 
-    getBrandNewLineId(oldLine){
-        if(!!oldLine){
-            return oldLine.id + 1;
-        }
-
-        return 0;
-    }
-
-    addLine(){
-        let {lines: oldLines, newLine} = this.state;
+    addLineHandler = () => {
+        let { newLine } = this.state;
 
         if(!newLine) return;
 
-        oldLines.push({
-            id: this.getBrandNewLineId(oldLines[oldLines.length-1]),
-            name: newLine,
-            color: 'blue'
-        });
+        let { addLineAction } = this.props;
 
-        this.setState({lines: oldLines, newLine: ''})
+        addLineAction({name: newLine});
+        this.setState({ newLine: ''})
     }
 
-    deleteLine(id){
-        let { lines } = this.state;
-        lines.splice(id, 1);
-
-        this.setState({lines})
+    deleteLineHandler = (id) => {
+        const { deleteLineAction } = this.props;
+        deleteLineAction(id);
     }
 
     render(){
-       const { newLine, lines } = this.state;
+       const { newLine } = this.state;
+       const { lines } = this.props;
        
        return(<div className={lineStyles['main-container']}>
             <div className={lineStyles['line-component']}>
@@ -67,18 +52,18 @@ class Lines extends Component{
                         this.setState({newLine: event.target.value})
                     }}/>
 
-                    <button className='btn third' onClick={this.addLine.bind(this)}>
+                    <button className='btn third' onClick={this.addLineHandler}>
                     {"Add Line"}
                     </button>
                 </div>
 
                 <div>
                     {
+                        
                         lines.map(line => {
                             return (<OneLine key={line.id} 
-                                             id={line.id} 
-                                             name={line.name}
-                                             deleteLine={(id) => this.deleteLine(id)}
+                                             line={line}
+                                             onDeleteLine={this.deleteLineHandler}
                                              />)
                         })
                     }
