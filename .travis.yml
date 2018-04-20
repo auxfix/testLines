@@ -18,9 +18,8 @@ script:
   - npm run test
   - npm run build
   - docker-compose build
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 before_deploy:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD"
   - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
 deploy:
